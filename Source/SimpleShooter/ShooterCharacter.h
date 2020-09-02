@@ -13,7 +13,9 @@ class SIMPLESHOOTER_API AShooterCharacter : public ACharacter
 
 private:
 	void MoveForward(float AxisValue);
+	void MoveRight(float AxisValue);
 	void LookUp(float AxisValue);
+	void LookRight(float AxisValue);
 
 protected:
 	// Called when the game starts or when spawned
