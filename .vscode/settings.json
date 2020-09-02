@@ -1,0 +1,7 @@
+{
+	"files.exclude": {
+		"D:/Unreal Game Dev/repos/SimpleShooter/.vscode": true,
+		"D:/Unreal Game Dev/repos/SimpleShooter/Content": true,
+		"D:/Unreal Game Dev/repos/SimpleShooter/Intermediate": true
+	}
+}
