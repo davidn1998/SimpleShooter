@@ -12,10 +12,15 @@ class SIMPLESHOOTER_API AShooterCharacter : public ACharacter
 	GENERATED_BODY()
 
 private:
+	UPROPERTY(EditAnywhere)
+	float RotationRate = 50.f;
+
+	void LookUpRate(float AxisValue);
+	void LookRightRate(float AxisValue);
+	
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
-	void LookUp(float AxisValue);
-	void LookRight(float AxisValue);
+
 
 protected:
 	// Called when the game starts or when spawned
