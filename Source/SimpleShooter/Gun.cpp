@@ -61,7 +61,10 @@ void AGun::PullTrigger()
 	if(GetWorld()->LineTraceSingleByChannel(OUT Hit, ViewPointLocation, End, ECollisionChannel::ECC_GameTraceChannel1, TraceParams))
 	{
 		// DrawDebugLine(GetWorld(), ViewPointLocation, Hit.Location, FColor::Red, true);
-		DrawDebugPoint(GetWorld(), Hit.Location, 20.f, FColor::Red, true);
+		// DrawDebugPoint(GetWorld(), Hit.Location, 20.f, FColor::Red, true);
+
+		FVector ShotDirection = -ViewPointRotation.Vector();
+		UGameplayStatics::SpawnEmitterAtLocation(GetWorld(), ImpactEffect, Hit.Location, ShotDirection.Rotation());
 	}
 }
 
