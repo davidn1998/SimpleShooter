@@ -3,9 +3,10 @@
 
 #include "Gun.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "DrawDebugHelpers.h"
+#include "Engine/World.h"
 #include "kismet/GameplayStatics.h"
 #include "particles/ParticleSystem.h"
-#include "DrawDebugHelpers.h"
 
 #define OUT
 
@@ -50,6 +51,17 @@ void AGun::PullTrigger()
 	FRotator ViewPointRotation;
 	OwnerController->GetPlayerViewPoint(OUT ViewPointLocation, OUT ViewPointRotation);
 
-	DrawDebugCamera(GetWorld(), ViewPointLocation, ViewPointRotation, 90.f, 2, FColor::Red, true);
+	// DrawDebugCamera(GetWorld(), ViewPointLocation, ViewPointRotation, 90.f, 2, FColor::Red, true);
+
+	FVector End = ViewPointLocation + ViewPointRotation.Vector() * MaxRange;
+
+	FHitResult Hit;
+	FCollisionQueryParams TraceParams(FName(TEXT("")), false, GetOwner());
+
+	if(GetWorld()->LineTraceSingleByChannel(OUT Hit, ViewPointLocation, End, ECollisionChannel::ECC_GameTraceChannel1, TraceParams))
+	{
+		// DrawDebugLine(GetWorld(), ViewPointLocation, Hit.Location, FColor::Red, true);
+		DrawDebugPoint(GetWorld(), Hit.Location, 20.f, FColor::Red, true);
+	}
 }
 

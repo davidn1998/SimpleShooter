@@ -24,6 +24,9 @@ private:
 	UPROPERTY(EditAnywhere)
 	UParticleSystem* MuzzleFlash;
 
+	UPROPERTY(EditAnywhere)
+	float MaxRange = 5000.f;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
