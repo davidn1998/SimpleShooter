@@ -14,12 +14,17 @@ class SIMPLESHOOTER_API AShooterCharacter : public ACharacter
 private:
 	UPROPERTY(EditAnywhere)
 	float RotationRate = 50.f;
+	UPROPERTY(EditAnywhere)
+	float SprintMultiplier = 1.5f;
 
 	void LookUpRate(float AxisValue);
 	void LookRightRate(float AxisValue);
 	
 	void MoveForward(float AxisValue);
 	void MoveRight(float AxisValue);
+
+	void SprintOn();
+	void SprintOff();
 
 
 protected:
