@@ -7,6 +7,7 @@
 #include "Gun.generated.h"
 
 class USkeletalMeshComponent;
+class UParticleSystem;
 
 UCLASS()
 class SIMPLESHOOTER_API AGun : public AActor
@@ -19,6 +20,9 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	USkeletalMeshComponent* Mesh;
+
+	UPROPERTY(EditAnywhere)
+	UParticleSystem* MuzzleFlash;
 
 protected:
 	// Called when the game starts or when spawned

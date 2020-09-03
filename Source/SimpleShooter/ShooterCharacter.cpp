@@ -42,6 +42,7 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 	PlayerInputComponent->BindAction(TEXT("Jump"), IE_Pressed, this, &ACharacter::Jump);
 	PlayerInputComponent->BindAction(TEXT("Sprint"), IE_Pressed, this, &AShooterCharacter::SprintOn);
 	PlayerInputComponent->BindAction(TEXT("Sprint"), IE_Released, this, &AShooterCharacter::SprintOff);
+	PlayerInputComponent->BindAction(TEXT("Shoot"), IE_Pressed, this, &AShooterCharacter::Shoot);
 	
 	// Controller Look Input
 	PlayerInputComponent->BindAxis(TEXT("LookUpRate"), this, &AShooterCharacter::LookUpRate);
@@ -67,6 +68,11 @@ void AShooterCharacter::SprintOn()
 void AShooterCharacter::SprintOff() 
 {
 	GetCharacterMovement()->MaxWalkSpeed /= SprintMultiplier;
+}
+
+void AShooterCharacter::Shoot() 
+{
+	Gun->PullTrigger();
 }
 
 void AShooterCharacter::LookUpRate(float AxisValue) 

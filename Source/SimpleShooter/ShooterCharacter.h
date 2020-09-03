@@ -34,6 +34,8 @@ private:
 	void SprintOn();
 	void SprintOff();
 
+	void Shoot();
+
 
 protected:
 	// Called when the game starts or when spawned

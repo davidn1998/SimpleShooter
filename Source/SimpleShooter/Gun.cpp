@@ -3,6 +3,9 @@
 
 #include "Gun.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "kismet/GameplayStatics.h"
+#include "particles/ParticleSystem.h"
+
 // Sets default values
 AGun::AGun()
 {
@@ -14,6 +17,8 @@ AGun::AGun()
 	
 	Mesh = CreateDefaultSubobject<USkeletalMeshComponent>(TEXT("Mesh"));
 	Mesh->SetupAttachment(Root);
+
+	MuzzleFlash = CreateDefaultSubobject<UParticleSystem>(TEXT("Muzzle Flash"));
 }
 
 // Called when the game starts or when spawned
@@ -32,6 +37,6 @@ void AGun::Tick(float DeltaTime)
 
 void AGun::PullTrigger() 
 {
-	UE_LOG(LogTemp, Warning, TEXT("Shot Fired"));
+	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
 }
 
