@@ -24,6 +24,8 @@ private:
 	float RotationRate = 50.f;
 	UPROPERTY(EditAnywhere)
 	float SprintMultiplier = 1.5f;
+	
+	bool IsSprinting = false;
 
 	void LookUpRate(float AxisValue);
 	void LookRightRate(float AxisValue);

@@ -62,17 +62,31 @@ void AShooterCharacter::MoveRight(float AxisValue)
 
 void AShooterCharacter::SprintOn() 
 {
-	GetCharacterMovement()->MaxWalkSpeed *= SprintMultiplier;
+	if(!IsSprinting)
+	{
+		GetCharacterMovement()->MaxWalkSpeed *= SprintMultiplier;
+		IsSprinting = true;
+	}
 }
 
 void AShooterCharacter::SprintOff() 
 {
-	GetCharacterMovement()->MaxWalkSpeed /= SprintMultiplier;
+	if(IsSprinting)
+	{
+		GetCharacterMovement()->MaxWalkSpeed /= SprintMultiplier;
+		IsSprinting = false;
+	}
 }
 
 void AShooterCharacter::Shoot() 
 {
 	Gun->PullTrigger();
+	
+	if (IsSprinting)
+	{
+		GetCharacterMovement()->MaxWalkSpeed /= SprintMultiplier;
+		IsSprinting = false;
+	}
 }
 
 void AShooterCharacter::LookUpRate(float AxisValue) 
