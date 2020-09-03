@@ -5,6 +5,9 @@
 #include "Components/SkeletalMeshComponent.h"
 #include "kismet/GameplayStatics.h"
 #include "particles/ParticleSystem.h"
+#include "DrawDebugHelpers.h"
+
+#define OUT
 
 // Sets default values
 AGun::AGun()
@@ -25,18 +28,28 @@ AGun::AGun()
 void AGun::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
 void AGun::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void AGun::PullTrigger() 
 {
 	UGameplayStatics::SpawnEmitterAttached(MuzzleFlash, Mesh, TEXT("MuzzleFlashSocket"));
+
+	APawn* OwnerPawn = Cast<APawn>(GetOwner());
+	if(!OwnerPawn) {return;}
+
+	AController* OwnerController = OwnerPawn->GetController();
+	if(!OwnerController) {return;}
+
+	FVector ViewPointLocation;
+	FRotator ViewPointRotation;
+	OwnerController->GetPlayerViewPoint(OUT ViewPointLocation, OUT ViewPointRotation);
+
+	DrawDebugCamera(GetWorld(), ViewPointLocation, ViewPointRotation, 90.f, 2, FColor::Red, true);
 }
 
